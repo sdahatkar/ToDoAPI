@@ -1,15 +1,20 @@
 trigger:
-- main
+  - main
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: "windows-latest"
 
 variables:
-  buildConfiguration: 'Release'
+  buildConfiguration: "Release"
 
 steps:
   - task: DotNetCoreCLI@2
-    displayName: 'dotnet build'
+    displayName: "dotnet build"
     inputs:
       command: build
-      arguments: '--configuration $(buildConfiguration)'
+      arguments: "--configuration $(buildConfiguration)"
+  - task: DotNetCoreCLI@2
+    displayName: "dotnet test"
+    inputs:
+      command: test
+      arguments: "--configuration $(buildConfiguration)"
